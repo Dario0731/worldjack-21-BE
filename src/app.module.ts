@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { PlayerModule } from './modules/player.module'; 
 import { Player } from './schema';
 import { BankModule } from './modules/bank.module';
+import { GameModule } from './modules/game.module';
 
 @Module({
   imports: [
@@ -19,7 +20,7 @@ import { BankModule } from './modules/bank.module';
       synchronize: false,
 
     }),
-    PlayerModule, BankModule
+    PlayerModule, BankModule, GameModule
   ],
   controllers: [AppController],
   providers: [AppService],
