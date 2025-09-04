@@ -4,6 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PlayerModule } from './modules/player.module'; 
 import { Player } from './schema';
+import { BankModule } from './modules/bank.module';
 
 @Module({
   imports: [
@@ -18,7 +19,7 @@ import { Player } from './schema';
       synchronize: false,
 
     }),
-    PlayerModule,
+    PlayerModule, BankModule
   ],
   controllers: [AppController],
   providers: [AppService],

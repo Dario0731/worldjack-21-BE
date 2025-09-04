@@ -1,13 +1,12 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 
-
 @Entity('players')
 export class Player {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ unique: true })
-  worldId: string; // Identificador del usuario en World App
+  worldId: string;
 
   @Column()
   username: string;
@@ -34,12 +33,8 @@ export class Bank {
   @Column({ default: 0 })
   score: number;
 
-  @Column('simple-array', { nullable: true })
-  hand: string[];
-
-  constructor(score: number = 0, hand: string[] = []) {
+  constructor(score: number = 0) {
     this.score = score;
-    this.hand = hand;
   }
 }
 
@@ -54,21 +49,13 @@ export class Game {
   @Column()
   betAmount: number;
 
-  @Column('simple-array', { nullable: true })
-  playerHand: string[];
-
   @Column({ default: 0 })
   playerScore: number;
-
-  @Column('simple-array', { nullable: true })
-  bankHand: string[];
 
   @Column({ default: 0 })
   bankScore: number;
 
-  @Column({
-    default: 'playing',
-  })
+  @Column({ default: 'playing' })
   status: 'playing' | 'won' | 'lost' | 'push';
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
@@ -77,8 +64,6 @@ export class Game {
   constructor(player: Player, betAmount: number) {
     this.player = player;
     this.betAmount = betAmount;
-    this.playerHand = [];
-    this.bankHand = [];
     this.playerScore = 0;
     this.bankScore = 0;
     this.status = 'playing';
@@ -94,7 +79,7 @@ export class Transaction {
   player: Player;
 
   @Column()
-  amount: number; // positivo = gana, negativo = pierde
+  amount: number;
 
   @Column()
   type: 'bet' | 'win' | 'lose' | 'deposit';
@@ -106,5 +91,34 @@ export class Transaction {
     this.player = player;
     this.amount = amount;
     this.type = type;
+  }
+}
+
+export class Card {
+  rank: string;
+  suit: string;
+  value: number;
+
+  constructor(rank: string, suit: string, value: number) {
+    this.rank = rank;
+    this.suit = suit;
+    this.value = value;
+  }
+
+  static generateDeck(): Card[] {
+    const suits = ['♠', '♥', '♦', '♣'];
+    const ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+    const deck: Card[] = [];
+
+    for (const suit of suits) {
+      for (const rank of ranks) {
+        let value = 0;
+        if (rank === 'A') value = 11;
+        else if (['J', 'Q', 'K'].includes(rank)) value = 10;
+        else value = parseInt(rank, 10);
+        deck.push(new Card(rank, suit, value));
+      }
+    }
+    return deck;
   }
 }

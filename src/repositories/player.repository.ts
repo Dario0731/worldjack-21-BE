@@ -15,12 +15,12 @@ export class PlayerRepository {
     return await this.repo.save(player);
   }
 
-  async findByWorldId(worldId: string): Promise<Player | null> {
-    return await this.repo.findOne({ where: { worldId } });
+  async findById(id: number): Promise<Player | null> {
+    return await this.repo.findOne({ where: { id } });
   }
 
-  async findById(id: number): Promise<Player | null> {
-    return await this.repo.findOneBy({ id });
+  async findByWorldId(worldId: string): Promise<Player | null> {
+    return await this.repo.findOne({ where: { worldId } });
   }
 
   async save(player: Player): Promise<Player> {
