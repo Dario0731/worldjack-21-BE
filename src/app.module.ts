@@ -4,7 +4,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PlayerModule } from './modules/player.module'; 
 import { Player } from './schema';
-import { BankModule } from './modules/bank.module';
 import { GameModule } from './modules/game.module';
 import { TransactionModule } from './modules/transaction.module';
 
@@ -21,7 +20,7 @@ import { TransactionModule } from './modules/transaction.module';
       synchronize: false,
 
     }),
-    PlayerModule, BankModule, GameModule, TransactionModule
+    PlayerModule, GameModule, TransactionModule
   ],
   controllers: [AppController],
   providers: [AppService],

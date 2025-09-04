@@ -14,21 +14,21 @@ export class PlayerService {
     return await this.playerRepo.findByWorldId(worldId);
   }
 
-  async updateBalance(id: number, amount: number): Promise<Player> {
-    const player = await this.playerRepo.findById(id);
+  async updateBalance(id: string, amount: number): Promise<Player> {
+    const player = await this.playerRepo.findByWorldId(id);
     if (!player) throw new NotFoundException('Player not found');
     player.balance += amount;
     return await this.playerRepo.save(player);
   }
 
-  async deactivate(id: number): Promise<Player> {
-    const player = await this.playerRepo.findById(id);
+  async deactivate(id: string): Promise<Player> {
+    const player = await this.playerRepo.findByWorldId(id);
     if (!player) throw new NotFoundException('Player not found');
     player.isActive = false;
     return await this.playerRepo.save(player);
   }
 
-  async restartBalance(id: number): Promise<Player> {
+  async restartBalance(id: string): Promise<Player> {
     const player = await this.playerRepo.restartBalance(id);
     if (!player) throw new NotFoundException('Player not found');
     return player;

@@ -18,19 +18,19 @@ export class PlayerController {
 
   @Patch(':id/balance')
   async updateBalance(
-    @Param('id') id: number,
+    @Param('id') id: string,
     @Body() body: { amount: number },
   ): Promise<Player> {
     return await this.playerService.updateBalance(id, body.amount);
   }
 
   @Patch(':id/deactivate')
-  async deactivate(@Param('id') id: number): Promise<Player> {
+  async deactivate(@Param('id') id: string): Promise<Player> {
     return await this.playerService.deactivate(id);
   }
 
   @Patch(':id/restart-balance')
-  async restartBalance(@Param('id') id: number): Promise<Player> {
+  async restartBalance(@Param('id') id: string): Promise<Player> {
     return await this.playerService.restartBalance(id);
   }
 }

@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToOne, JoinColumn } from 'typeorm';
 
 @Entity('players')
 export class Player {
@@ -46,6 +46,10 @@ export class Game {
   @ManyToOne(() => Player)
   player: Player;
 
+  @OneToOne(() => Bank, { cascade: true })
+  @JoinColumn()
+  bank: Bank;
+
   @Column()
   betAmount: number;
 
@@ -60,15 +64,8 @@ export class Game {
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
-
-  constructor(player: Player, betAmount: number) {
-    this.player = player;
-    this.betAmount = betAmount;
-    this.playerScore = 0;
-    this.bankScore = 0;
-    this.status = 'playing';
-  }
 }
+
 
 @Entity('transactions')
 export class Transaction {

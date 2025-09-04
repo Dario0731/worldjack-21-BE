@@ -15,10 +15,6 @@ export class PlayerRepository {
     return await this.repo.save(player);
   }
 
-  async findById(id: number): Promise<Player | null> {
-    return await this.repo.findOne({ where: { id } });
-  }
-
   async findByWorldId(worldId: string): Promise<Player | null> {
     return await this.repo.findOne({ where: { worldId } });
   }
@@ -27,8 +23,8 @@ export class PlayerRepository {
     return await this.repo.save(player);
   }
 
-  async restartBalance(id: number): Promise<Player | null> {
-    const player = await this.findById(id);
+  async restartBalance(id: string): Promise<Player | null> {
+    const player = await this.findByWorldId(id);
     if (!player) return null;
     player.balance = 1000;
     return await this.repo.save(player);
