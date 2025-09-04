@@ -6,6 +6,7 @@ import { PlayerModule } from './modules/player.module';
 import { Player } from './schema';
 import { BankModule } from './modules/bank.module';
 import { GameModule } from './modules/game.module';
+import { TransactionModule } from './modules/transaction.module';
 
 @Module({
   imports: [
@@ -20,7 +21,7 @@ import { GameModule } from './modules/game.module';
       synchronize: false,
 
     }),
-    PlayerModule, BankModule, GameModule
+    PlayerModule, BankModule, GameModule, TransactionModule
   ],
   controllers: [AppController],
   providers: [AppService],
