@@ -7,12 +7,16 @@ export class PlayerController {
   constructor(private readonly playerService: PlayerService) {}
 
   @Post()
-  async create(@Body() body: { worldId: string; username: string }): Promise<Player> {
+  async create(
+    @Body() body: { worldId: string; username: string },
+  ): Promise<Player> {
     return await this.playerService.create(body.worldId, body.username);
   }
 
   @Get(':worldId')
-  async findByWorldId(@Param('worldId') worldId: string): Promise<Player | null> {
+  async findByWorldId(
+    @Param('worldId') worldId: string,
+  ): Promise<Player | null> {
     return await this.playerService.findByWorldId(worldId);
   }
 

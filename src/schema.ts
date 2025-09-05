@@ -17,11 +17,11 @@ export class Player {
   @Column({ default: true })
   isActive: boolean;
 
-  constructor(worldId: string, username: string, balance: number = 1000) {
+  constructor(worldId: string, username: string, balance: number = 1000,isActive:true) {
     this.worldId = worldId;
     this.username = username;
     this.balance = balance;
-    this.isActive = true;
+    this.isActive = isActive;
   }
 }
 
